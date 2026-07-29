@@ -50,6 +50,7 @@ let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
 let flashcardMode = false;
+let userAnswers = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -70,6 +71,7 @@ const themeSelect = getElement("#theme-select");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
+const recapBody = getElement("#recap-body");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
@@ -91,6 +93,7 @@ async function startQuiz(flashcard) {
 
   currentQuestionIndex = 0;
   score = 0;
+  userAnswers = [];
 
   const theme = themeSelect.value;
   const pool =
@@ -142,6 +145,7 @@ function selectAnswer(index, btn) {
   clearInterval(timerId);
 
   const q = questions[currentQuestionIndex];
+  userAnswers[currentQuestionIndex] = index;
   if (index === q.correct) {
     if (!flashcardMode) {
       score++;
@@ -183,6 +187,32 @@ function endQuiz() {
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+
+  showRecap();
+}
+
+function showRecap() {
+  recapBody.innerHTML = "";
+
+  questions.forEach((q, i) => {
+    const row = document.createElement("tr");
+
+    const questionCell = document.createElement("td");
+    questionCell.textContent = q.text;
+
+    const userCell = document.createElement("td");
+    const userAnswer = userAnswers[i];
+    userCell.textContent =
+      userAnswer !== undefined ? q.answers[userAnswer] : "Pas de réponse";
+
+    const correctCell = document.createElement("td");
+    correctCell.textContent = q.answers[q.correct];
+
+    row.appendChild(questionCell);
+    row.appendChild(userCell);
+    row.appendChild(correctCell);
+    recapBody.appendChild(row);
+  });
 }
 
 function restartQuiz() {
