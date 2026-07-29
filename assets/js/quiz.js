@@ -36,6 +36,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let flashcardMode = false;
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -49,7 +50,9 @@ const questionText = getElement("#question-text");
 const answersDiv = getElement("#answers");
 const nextBtn = getElement("#next-btn");
 const startBtn = getElement("#start-btn");
+const flashcardBtn = getElement("#flashcard-btn");
 const restartBtn = getElement("#restart-btn");
+const timerDiv = getElement("#timer-div");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -58,13 +61,16 @@ const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
 
 // Init
-startBtn.addEventListener("click", startQuiz);
+startBtn.addEventListener("click", () => startQuiz(false));
+flashcardBtn.addEventListener("click", () => startQuiz(true));
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
 
-function startQuiz() {
+function startQuiz(flashcard) {
+  flashcardMode = flashcard;
+
   hideElement(introScreen);
   showElement(questionScreen);
 
@@ -91,6 +97,14 @@ function showQuestion() {
 
   nextBtn.classList.add("hidden");
 
+  // Pas de chrono en mode flashcard, bouton suivant toujours visible
+  if (flashcardMode) {
+    hideElement(timerDiv);
+    nextBtn.classList.remove("hidden");
+    return;
+  }
+
+  showElement(timerDiv);
   timeLeftSpan.textContent = q.timeLimit;
   timerId = startTimer(
     q.timeLimit,
@@ -107,7 +121,9 @@ function selectAnswer(index, btn) {
 
   const q = questions[currentQuestionIndex];
   if (index === q.correct) {
-    score++;
+    if (!flashcardMode) {
+      score++;
+    }
     btn.classList.add("correct");
   } else {
     btn.classList.add("wrong");
@@ -129,6 +145,13 @@ function nextQuestion() {
 
 function endQuiz() {
   hideElement(questionScreen);
+
+  // En mode flashcard, pas de score : retour à l'accueil
+  if (flashcardMode) {
+    showElement(introScreen);
+    return;
+  }
+
   showElement(resultScreen);
 
   updateScoreDisplay(scoreText, score, questions.length);
