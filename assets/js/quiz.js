@@ -100,7 +100,7 @@ async function startQuiz(flashcard) {
     theme === "all"
       ? allQuestions
       : allQuestions.filter((question) => question.theme === theme);
-  questions = shuffleArray(pool);
+  questions = shuffleArray(pool).sort((a, b) => a.difficulty - b.difficulty);
 
   setText(totalQuestionsSpan, questions.length);
 
