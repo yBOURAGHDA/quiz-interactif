@@ -18,20 +18,32 @@ import {
 
 console.log("Quiz JS loaded...");
 
-let questions = [
-  {
-    text: "Quelle est la capitale de la France ?",
-    answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
-    correct: 1,
-    timeLimit: 10,
-  },
-  {
-    text: "Combien font 2 + 3 ?",
-    answers: ["3", "4", "5", "1"],
-    correct: 2,
-    timeLimit: 5,
-  },
-];
+let allQuestions = [];
+let questions = [];
+
+async function loadQuestions() {
+  const url = new URL("../data/questions.json", import.meta.url);
+  const data = await fetch(url).then((response) => response.json());
+  allQuestions = Object.entries(data).flatMap(([theme, list]) =>
+    list.map((question) => ({ ...question, theme }))
+  );
+  populateThemes(Object.keys(data));
+}
+
+function populateThemes(themes) {
+  const allOption = document.createElement("option");
+  allOption.value = "all";
+  allOption.textContent = "Tous les themes";
+  themeSelect.appendChild(allOption);
+  themes.forEach((theme) => {
+    const option = document.createElement("option");
+    option.value = theme;
+    option.textContent = theme;
+    themeSelect.appendChild(option);
+  });
+}
+
+const questionsReady = loadQuestions();
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -54,6 +66,7 @@ const startBtn = getElement("#start-btn");
 const flashcardBtn = getElement("#flashcard-btn");
 const restartBtn = getElement("#restart-btn");
 const timerDiv = getElement("#timer-div");
+const themeSelect = getElement("#theme-select");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -69,7 +82,8 @@ restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
 
-function startQuiz(flashcard) {
+async function startQuiz(flashcard) {
+  await questionsReady;
   flashcardMode = flashcard;
 
   hideElement(introScreen);
@@ -78,7 +92,12 @@ function startQuiz(flashcard) {
   currentQuestionIndex = 0;
   score = 0;
 
-  questions = shuffleArray(questions);
+  const theme = themeSelect.value;
+  const pool =
+    theme === "all"
+      ? allQuestions
+      : allQuestions.filter((question) => question.theme === theme);
+  questions = shuffleArray(pool);
 
   setText(totalQuestionsSpan, questions.length);
 
