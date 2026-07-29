@@ -18,14 +18,29 @@ import {
 
 console.log("Quiz JS loaded...");
 
+let allQuestions = [];
 let questions = [];
 
 async function loadQuestions() {
   const url = new URL("../data/questions.json", import.meta.url);
   const data = await fetch(url).then((response) => response.json());
-  questions = Object.entries(data).flatMap(([theme, list]) =>
+  allQuestions = Object.entries(data).flatMap(([theme, list]) =>
     list.map((question) => ({ ...question, theme }))
   );
+  populateThemes(Object.keys(data));
+}
+
+function populateThemes(themes) {
+  const allOption = document.createElement("option");
+  allOption.value = "all";
+  allOption.textContent = "Tous les themes";
+  themeSelect.appendChild(allOption);
+  themes.forEach((theme) => {
+    const option = document.createElement("option");
+    option.value = theme;
+    option.textContent = theme;
+    themeSelect.appendChild(option);
+  });
 }
 
 const questionsReady = loadQuestions();
@@ -51,6 +66,7 @@ const startBtn = getElement("#start-btn");
 const flashcardBtn = getElement("#flashcard-btn");
 const restartBtn = getElement("#restart-btn");
 const timerDiv = getElement("#timer-div");
+const themeSelect = getElement("#theme-select");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -76,7 +92,12 @@ async function startQuiz(flashcard) {
   currentQuestionIndex = 0;
   score = 0;
 
-  questions = shuffleArray(questions);
+  const theme = themeSelect.value;
+  const pool =
+    theme === "all"
+      ? allQuestions
+      : allQuestions.filter((question) => question.theme === theme);
+  questions = shuffleArray(pool);
 
   setText(totalQuestionsSpan, questions.length);
 
