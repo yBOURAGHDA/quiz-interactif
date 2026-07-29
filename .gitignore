@@ -10,3 +10,6 @@ Thumbs.db
 .idea/
 
 node_modules/
+
+*.css.map
+.sass-cache/

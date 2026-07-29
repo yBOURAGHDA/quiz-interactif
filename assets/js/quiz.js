@@ -13,11 +13,12 @@ import {
   loadFromLocalStorage,
   saveToLocalStorage,
   startTimer,
+  shuffleArray,
 } from "./utils.js";
 
 console.log("Quiz JS loaded...");
 
-const questions = [
+let questions = [
   {
     text: "Quelle est la capitale de la France ?",
     answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
@@ -76,6 +77,8 @@ function startQuiz(flashcard) {
 
   currentQuestionIndex = 0;
   score = 0;
+
+  questions = shuffleArray(questions);
 
   setText(totalQuestionsSpan, questions.length);
 
