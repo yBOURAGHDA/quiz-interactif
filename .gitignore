@@ -1,3 +1,4 @@
+#mon .env
 .env
 .env.local
 .env.*.local
