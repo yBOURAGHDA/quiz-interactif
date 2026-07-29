@@ -63,6 +63,8 @@ const bestScoreEnd = getElement("#best-score-end");
 const questionText = getElement("#question-text");
 const answersDiv = getElement("#answers");
 const nextBtn = getElement("#next-btn");
+const clueBtn = getElement("#clue-btn");
+const clueText = getElement("#clue-text");
 const startBtn = getElement("#start-btn");
 const flashcardBtn = getElement("#flashcard-btn");
 const restartBtn = getElement("#restart-btn");
@@ -80,6 +82,7 @@ const totalQuestionsSpan = getElement("#total-questions");
 startBtn.addEventListener("click", () => startQuiz(false));
 flashcardBtn.addEventListener("click", () => startQuiz(true));
 nextBtn.addEventListener("click", nextQuestion);
+clueBtn.addEventListener("click", showClue);
 restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
@@ -121,6 +124,15 @@ function showQuestion() {
   });
 
   nextBtn.classList.add("hidden");
+  hideElement(clueText);
+  setText(clueText, "");
+
+  if (q.clue) {
+    showElement(clueBtn);
+    clueBtn.disabled = false;
+  } else {
+    hideElement(clueBtn);
+  }
 
   // Pas de chrono en mode flashcard, bouton suivant toujours visible
   if (flashcardMode) {
@@ -139,6 +151,15 @@ function showQuestion() {
       nextBtn.classList.remove("hidden");
     }
   );
+}
+
+function showClue() {
+  const q = questions[currentQuestionIndex];
+  if (!q.clue) return;
+
+  setText(clueText, q.clue);
+  showElement(clueText);
+  clueBtn.disabled = true;
 }
 
 function selectAnswer(index, btn) {
