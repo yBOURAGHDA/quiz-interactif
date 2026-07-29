@@ -18,20 +18,17 @@ import {
 
 console.log("Quiz JS loaded...");
 
-let questions = [
-  {
-    text: "Quelle est la capitale de la France ?",
-    answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
-    correct: 1,
-    timeLimit: 10,
-  },
-  {
-    text: "Combien font 2 + 3 ?",
-    answers: ["3", "4", "5", "1"],
-    correct: 2,
-    timeLimit: 5,
-  },
-];
+let questions = [];
+
+async function loadQuestions() {
+  const url = new URL("../data/questions.json", import.meta.url);
+  const data = await fetch(url).then((response) => response.json());
+  questions = Object.entries(data).flatMap(([theme, list]) =>
+    list.map((question) => ({ ...question, theme }))
+  );
+}
+
+const questionsReady = loadQuestions();
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -69,7 +66,8 @@ restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
 
-function startQuiz(flashcard) {
+async function startQuiz(flashcard) {
+  await questionsReady;
   flashcardMode = flashcard;
 
   hideElement(introScreen);
