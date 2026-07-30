@@ -43,6 +43,20 @@ function populateThemes(themes) {
   });
 }
 
+const THEME_COLORS = {
+  sport: "var(--color-sport)",
+  histoire: "var(--color-histoire)",
+  geographie: "var(--color-geographie)",
+};
+
+const DEFAULT_BACKGROUND =
+  "linear-gradient(160deg, var(--color-bg-start), var(--color-bg-end))";
+
+function applyThemeBackground(theme) {
+  document.body.style.background =
+    THEME_COLORS[theme?.toLowerCase()] ?? DEFAULT_BACKGROUND;
+}
+
 const questionsReady = loadQuestions();
 
 let currentQuestionIndex = 0;
@@ -116,6 +130,8 @@ function showQuestion() {
   const q = questions[currentQuestionIndex];
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
+
+  applyThemeBackground(q.theme);
 
   answersDiv.innerHTML = "";
   q.answers.forEach((answer, index) => {
@@ -195,6 +211,7 @@ function endQuiz() {
 
   // En mode flashcard, pas de score : retour à l'accueil
   if (flashcardMode) {
+    applyThemeBackground();
     showElement(introScreen);
     return;
   }
@@ -238,6 +255,7 @@ function showRecap() {
 
 function restartQuiz() {
   hideElement(resultScreen);
+  applyThemeBackground();
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);

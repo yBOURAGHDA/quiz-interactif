@@ -1,10 +1,54 @@
+:root {
+  /* Arrière-plans */
+  --color-bg-start: #eef3f8;
+  --color-bg-end: #fafafa;
+  --color-surface: #fff;
+  --color-answer: #f5f5f5;
+  --color-answer-hover: #e0e0e0;
+  --color-table-header: #eceff1;
+  --color-table-row-alt: #f7f7f7;
+
+  /* Texte */
+  --color-text: #333;
+  --color-text-muted: #555;
+  --color-text-on-primary: #fff;
+  --color-progress: #455a64;
+  --color-clue: #6d4c41;
+
+  /* Boutons principaux */
+  --color-primary: #1976d2;
+  --color-primary-hover: #1565c0;
+
+  /* Bouton flashcard */
+  --color-flashcard: #607d8b;
+  --color-flashcard-hover: #546e7a;
+
+  /* Bouton indice */
+  --color-clue-btn: #f9a825;
+  --color-clue-btn-hover: #f57f17;
+
+  /* États */
+  --color-correct: #c8e6c9;
+  --color-wrong: #ffcdd2;
+  --color-timer: #d32f2f;
+  --color-success: #2e7d32;
+
+  /* Bordures & ombres */
+  --color-border: #ccc;
+  --color-border-light: #e0e0e0;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-histoire: #e29a9a;
+  --color-sport: #6fe5b8;
+  --color-geographie: #6a6ae3;
+}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 20px;
   text-align: center;
-  background: linear-gradient(160deg, #eef3f8, #fafafa);
+  background: linear-gradient(160deg, var(--color-bg-start), var(--color-bg-end));
   min-height: 100vh;
-  color: #333;
+  color: var(--color-text);
 }
 
 h1 {
@@ -14,22 +58,22 @@ h1 {
 .notice {
   font-style: italic;
   margin-bottom: 15px;
-  color: #555;
+  color: var(--color-text-muted);
 }
 
 button {
   margin: 10px auto;
   padding: 10px 20px;
   cursor: pointer;
-  background-color: #1976d2;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
   border: none;
   border-radius: 6px;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #1565c0;
+  background-color: var(--color-primary-hover);
 }
 
 .hidden {
@@ -41,49 +85,49 @@ button:hover {
 #result-screen {
   max-width: 600px;
   margin: 0 auto 20px;
-  background: #fff;
+  background: var(--color-surface);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px var(--color-shadow);
 }
 
 #answers button {
   display: block;
   width: 60%;
   margin: 8px auto;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: var(--color-answer);
+  color: var(--color-text);
   border-radius: 4px;
   transition: background-color 0.3s;
 }
 
 #answers button:hover {
-  background-color: #e0e0e0;
+  background-color: var(--color-answer-hover);
 }
 
 .correct {
-  background-color: #c8e6c9 !important; /* vert clair */
+  background-color: var(--color-correct) !important;
 }
 
 .wrong {
-  background-color: #ffcdd2 !important; /* rouge clair */
+  background-color: var(--color-wrong) !important;
 }
 
 #timer-div {
   margin-top: 10px;
   font-weight: bold;
-  color: #d32f2f; /* rouge foncé */
+  color: var(--color-timer);
 }
 
 #progress {
   font-weight: bold;
   margin-bottom: 10px;
-  color: #455a64;
+  color: var(--color-progress);
 }
 
 #result-screen h2 {
   margin-bottom: 20px;
-  color: #2e7d32; /* vert foncé */
+  color: var(--color-success);
 }
 
 #score-text {
@@ -97,33 +141,33 @@ button:hover {
 
 #theme-select {
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   font-size: 1em;
   cursor: pointer;
-  background: #fff;
-  color: #333;
+  background: var(--color-surface);
+  color: var(--color-text);
 }
 
 #flashcard-btn {
-  background-color: #607d8b;
+  background-color: var(--color-flashcard);
 }
 
 #flashcard-btn:hover {
-  background-color: #546e7a;
+  background-color: var(--color-flashcard-hover);
 }
 
 #clue-btn {
-  background-color: #f9a825;
+  background-color: var(--color-clue-btn);
 }
 
 #clue-btn:hover {
-  background-color: #f57f17;
+  background-color: var(--color-clue-btn-hover);
 }
 
 #clue-text {
   font-style: italic;
-  color: #6d4c41;
+  color: var(--color-clue);
 }
 
 /* tableau de recap */
@@ -136,15 +180,15 @@ button:hover {
 
 #recap-table th,
 #recap-table td {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-border-light);
   padding: 8px 10px;
   text-align: left;
 }
 
 #recap-table th {
-  background-color: #eceff1;
+  background-color: var(--color-table-header);
 }
 
 #recap-table tr:nth-child(even) {
-  background-color: #f7f7f7;
+  background-color: var(--color-table-row-alt);
 }
