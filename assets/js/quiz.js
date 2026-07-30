@@ -70,6 +70,8 @@ const flashcardBtn = getElement("#flashcard-btn");
 const restartBtn = getElement("#restart-btn");
 const timerDiv = getElement("#timer-div");
 const themeSelect = getElement("#theme-select");
+const shareBtn = getElement("#share-btn");
+const shareLink = getElement("#share-link");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -84,6 +86,7 @@ flashcardBtn.addEventListener("click", () => startQuiz(true));
 nextBtn.addEventListener("click", nextQuestion);
 clueBtn.addEventListener("click", showClue);
 restartBtn.addEventListener("click", restartQuiz);
+shareBtn.addEventListener("click", shareScore);
 
 setText(bestScoreValue, bestScore);
 
@@ -209,6 +212,9 @@ function endQuiz() {
   }
   setText(bestScoreEnd, bestScore);
 
+  hideElement(shareLink);
+  shareBtn.textContent = "Partager mon score";
+
   showRecap();
 }
 
@@ -241,4 +247,19 @@ function restartQuiz() {
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);
+}
+
+function shareScore() {
+  const lien =
+    location.origin +
+    location.pathname +
+    "?score=" +
+    score +
+    "&total=" +
+    questions.length;
+
+  setText(shareLink, lien);
+  showElement(shareLink);
+  navigator.clipboard.writeText(lien);
+  shareBtn.textContent = "Lien copie";
 }
