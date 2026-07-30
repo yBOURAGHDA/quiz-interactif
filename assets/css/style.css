@@ -91,11 +91,13 @@ button:hover {
   margin-bottom: 10px;
 }
 
-#theme-menu {
+#theme-menu,
+#language-menu {
   margin: 15px 0;
 }
 
-#theme-select {
+#theme-select,
+#lang-select {
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
