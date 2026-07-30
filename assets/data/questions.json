@@ -1,128 +1,263 @@
 {
   "Sport": [
     {
-      "text": "Combien de joueurs composent une equipe de football sur le terrain ?",
-      "answers": ["9", "10", "11", "12"],
+      "text": {
+        "fr": "Combien de joueurs composent une equipe de football sur le terrain ?",
+        "en": "How many players are on a football team on the field?"
+      },
+      "answers": {
+        "fr": ["9", "10", "11", "12"],
+        "en": ["9", "10", "11", "12"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "Le nombre de joueurs est impair"
+      "clue": {
+        "fr": "Le nombre de joueurs est impair",
+        "en": "The number of players is odd"
+      }
     },
     {
-      "text": "Dans quel sport realise-t-on un service gagnant appele « ace » ?",
-      "answers": ["Tennis", "Rugby", "Cyclisme", "Natation"],
+      "text": {
+        "fr": "Dans quel sport realise-t-on un service gagnant appele « ace » ?",
+        "en": "In which sport do you score a winning serve called an « ace »?"
+      },
+      "answers": {
+        "fr": ["Tennis", "Rugby", "Cyclisme", "Natation"],
+        "en": ["Tennis", "Rugby", "Cycling", "Swimming"]
+      },
       "correct": 0,
       "timeLimit": 10,
       "difficulty": 2,
-      "clue": "c'est un sport de raquette"
+      "clue": {
+        "fr": "c'est un sport de raquette",
+        "en": "It is a racket sport"
+      }
     },
     {
-      "text": "Tous les combien d'annees se deroulent les Jeux olympiques d'ete ?",
-      "answers": ["2 ans", "3 ans", "4 ans", "5 ans"],
+      "text": {
+        "fr": "Tous les combien d'annees se deroulent les Jeux olympiques d'ete ?",
+        "en": "How often are the Summer Olympic Games held?"
+      },
+      "answers": {
+        "fr": ["2 ans", "3 ans", "4 ans", "5 ans"],
+        "en": ["2 years", "3 years", "4 years", "5 years"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 2,
-      "clue": "c'est un sport de raquette"
+      "clue": {
+        "fr": "c'est un sport de raquette",
+        "en": "Think about a common Olympic cycle"
+      }
     },
     {
-      "text": "Quel pays a remporte la Coupe du monde de football en 2018 ?",
-      "answers": ["Bresil", "France", "Allemagne", "Argentine"],
+      "text": {
+        "fr": "Quel pays a remporte la Coupe du monde de football en 2018 ?",
+        "en": "Which country won the 2018 FIFA World Cup?"
+      },
+      "answers": {
+        "fr": ["Bresil", "France", "Allemagne", "Argentine"],
+        "en": ["Brazil", "France", "Germany", "Argentina"]
+      },
       "correct": 1,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "On est les meilleurs au monde"
+      "clue": {
+        "fr": "On est les meilleurs au monde",
+        "en": "We are the best in the world"
+      }
     },
     {
-      "text": "Combien de points vaut un panier a trois points au basket-ball ?",
-      "answers": ["1", "2", "3", "4"],
+      "text": {
+        "fr": "Combien de points vaut un panier a trois points au basket-ball ?",
+        "en": "How many points is a three-pointer worth in basketball?"
+      },
+      "answers": {
+        "fr": ["1", "2", "3", "4"],
+        "en": ["1", "2", "3", "4"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "réflechis"
+      "clue": {
+        "fr": "réflechis",
+        "en": "Think about it"
+      }
     }
   ],
   "Histoire": [
     {
-      "text": "En quelle annee a debute la Revolution francaise ?",
-      "answers": ["1689", "1789", "1815", "1848"],
+      "text": {
+        "fr": "En quelle annee a debute la Revolution francaise ?",
+        "en": "In which year did the French Revolution begin?"
+      },
+      "answers": {
+        "fr": ["1689", "1789", "1815", "1848"],
+        "en": ["1689", "1789", "1815", "1848"]
+      },
       "correct": 1,
       "timeLimit": 15,
       "difficulty": 3,
-      "clue": "1 an avant 1790"
+      "clue": {
+        "fr": "1 an avant 1790",
+        "en": "One year before 1790"
+      }
     },
     {
-      "text": "Qui fut le premier empereur des Francais ?",
-      "answers": ["Louis XIV", "Napoleon Bonaparte", "Charlemagne", "Jules Cesar"],
+      "text": {
+        "fr": "Qui fut le premier empereur des Francais ?",
+        "en": "Who was the first Emperor of the French?"
+      },
+      "answers": {
+        "fr": ["Louis XIV", "Napoleon Bonaparte", "Charlemagne", "Jules Cesar"],
+        "en": ["Louis XIV", "Napoleon Bonaparte", "Charlemagne", "Julius Caesar"]
+      },
       "correct": 1,
       "timeLimit": 15,
       "difficulty": 2,
-      "clue": "Charl...."
+      "clue": {
+        "fr": "Charl....",
+        "en": "Not Charlemagne..."
+      }
     },
     {
-      "text": "En quelle annee s'est terminee la Seconde Guerre mondiale ?",
-      "answers": ["1918", "1939", "1945", "1950"],
+      "text": {
+        "fr": "En quelle annee s'est terminee la Seconde Guerre mondiale ?",
+        "en": "In which year did World War II end?"
+      },
+      "answers": {
+        "fr": ["1918", "1939", "1945", "1950"],
+        "en": ["1918", "1939", "1945", "1950"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 2,
-      "clue": "194..."
+      "clue": {
+        "fr": "194...",
+        "en": "194..."
+      }
     },
     {
-      "text": "Quel mur emblematique est tombe en 1989 ?",
-      "answers": ["Le mur de Berlin", "La Grande Muraille", "Le mur d'Hadrien", "Le mur des Lamentations"],
+      "text": {
+        "fr": "Quel mur emblematique est tombe en 1989 ?",
+        "en": "Which iconic wall fell in 1989?"
+      },
+      "answers": {
+        "fr": ["Le mur de Berlin", "La Grande Muraille", "Le mur d'Hadrien", "Le mur des Lamentations"],
+        "en": ["The Berlin Wall", "The Great Wall", "Hadrian's Wall", "The Wailing Wall"]
+      },
       "correct": 0,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "Le mur de B..."
+      "clue": {
+        "fr": "Le mur de B...",
+        "en": "The B... wall"
+      }
     },
     {
-      "text": "Qui a atteint le continent americain en 1492 ?",
-      "answers": ["Vasco de Gama", "Christophe Colomb", "Fernand de Magellan", "Marco Polo"],
+      "text": {
+        "fr": "Qui a atteint le continent americain en 1492 ?",
+        "en": "Who reached the American continent in 1492?"
+      },
+      "answers": {
+        "fr": ["Vasco de Gama", "Christophe Colomb", "Fernand de Magellan", "Marco Polo"],
+        "en": ["Vasco da Gama", "Christopher Columbus", "Ferdinand Magellan", "Marco Polo"]
+      },
       "correct": 1,
       "timeLimit": 15,
       "difficulty": 3,
-      "clue": "Colomb...."
+      "clue": {
+        "fr": "Colomb....",
+        "en": "Columb..."
+      }
     }
   ],
   "Geographie": [
     {
-      "text": "Quelle est la capitale de l'Italie ?",
-      "answers": ["Milan", "Rome", "Naples", "Venise"],
+      "text": {
+        "fr": "Quelle est la capitale de l'Italie ?",
+        "en": "What is the capital of Italy?"
+      },
+      "answers": {
+        "fr": ["Milan", "Rome", "Naples", "Venise"],
+        "en": ["Milan", "Rome", "Naples", "Venice"]
+      },
       "correct": 1,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "La ville de l'amour"
+      "clue": {
+        "fr": "La ville de l'amour",
+        "en": "The Eternal City"
+      }
     },
     {
-      "text": "Quel est le plus grand ocean du monde ?",
-      "answers": ["Ocean Atlantique", "Ocean Pacifique", "Ocean Indien", "Ocean Arctique"],
+      "text": {
+        "fr": "Quel est le plus grand ocean du monde ?",
+        "en": "What is the largest ocean in the world?"
+      },
+      "answers": {
+        "fr": ["Ocean Atlantique", "Ocean Pacifique", "Ocean Indien", "Ocean Arctique"],
+        "en": ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"]
+      },
       "correct": 1,
       "timeLimit": 10,
       "difficulty": 2,
-      "clue": "Peace?"
+      "clue": {
+        "fr": "Peace?",
+        "en": "Peace?"
+      }
     },
     {
-      "text": "Quel est le plus haut sommet du monde ?",
-      "answers": ["Le mont Blanc", "Le K2", "L'Everest", "Le Kilimandjaro"],
+      "text": {
+        "fr": "Quel est le plus haut sommet du monde ?",
+        "en": "What is the highest mountain in the world?"
+      },
+      "answers": {
+        "fr": ["Le mont Blanc", "Le K2", "L'Everest", "Le Kilimandjaro"],
+        "en": ["Mont Blanc", "K2", "Mount Everest", "Mount Kilimanjaro"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "Everest...."
+      "clue": {
+        "fr": "Everest....",
+        "en": "Everest...."
+      }
     },
     {
-      "text": "Quelle est la capitale du Japon ?",
-      "answers": ["Pekin", "Seoul", "Tokyo", "Bangkok"],
+      "text": {
+        "fr": "Quelle est la capitale du Japon ?",
+        "en": "What is the capital of Japan?"
+      },
+      "answers": {
+        "fr": ["Pekin", "Seoul", "Tokyo", "Bangkok"],
+        "en": ["Beijing", "Seoul", "Tokyo", "Bangkok"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 1,
-      "clue": "Tokyo"
+      "clue": {
+        "fr": "Tokyo",
+        "en": "Tokyo"
+      }
     },
     {
-      "text": "Dans quel pays se trouve la ville de Marrakech ?",
-      "answers": ["Algerie", "Tunisie", "Maroc", "Egypte"],
+      "text": {
+        "fr": "Dans quel pays se trouve la ville de Marrakech ?",
+        "en": "In which country is the city of Marrakech located?"
+      },
+      "answers": {
+        "fr": ["Algerie", "Tunisie", "Maroc", "Egypte"],
+        "en": ["Algeria", "Tunisia", "Morocco", "Egypt"]
+      },
       "correct": 2,
       "timeLimit": 10,
       "difficulty": 3,
-      "clue": "Maroc"
+      "clue": {
+        "fr": "Maroc",
+        "en": "Morocco"
+      }
     }
   ]
 }
