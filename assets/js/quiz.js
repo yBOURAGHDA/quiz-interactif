@@ -1,11 +1,9 @@
-// quiz.js
 import {
   getElement,
   showElement,
   hideElement,
   setText,
   createAnswerButton,
-  updateScoreDisplay,
   lockAnswers,
   markCorrectAnswer,
 } from "./dom.js";
@@ -15,6 +13,7 @@ import {
   startTimer,
   shuffleArray,
 } from "./utils.js";
+import { t, setLocale, getLocale, getLocalized, languages } from "./i18n.js";
 
 console.log("Quiz JS loaded...");
 
@@ -31,9 +30,10 @@ async function loadQuestions() {
 }
 
 function populateThemes(themes) {
+  themeSelect.innerHTML = "";
   const allOption = document.createElement("option");
   allOption.value = "all";
-  allOption.textContent = "Tous les themes";
+  allOption.textContent = t("allThemes");
   themeSelect.appendChild(allOption);
   themes.forEach((theme) => {
     const option = document.createElement("option");
@@ -41,6 +41,55 @@ function populateThemes(themes) {
     option.textContent = theme;
     themeSelect.appendChild(option);
   });
+}
+
+function populateLanguages() {
+  languageSelect.innerHTML = "";
+  languages.forEach((lang) => {
+    const option = document.createElement("option");
+    option.value = lang.code;
+    option.textContent = lang.label;
+    languageSelect.appendChild(option);
+  });
+  languageSelect.value = getLocale();
+}
+
+function updateInterfaceLanguage() {
+  document.documentElement.lang = getLocale();
+  setText(appTitle, t("title"));
+  setText(appNotice, t("notice"));
+  setText(bestScoreLabel, `${t("bestScore")} :`);
+  setText(themeLabel, `${t("theme")} :`);
+  setText(languageLabel, `${t("language")} :`);
+  setText(startBtn, t("start"));
+  setText(flashcardBtn, t("flashcard"));
+  setText(nextBtn, t("next"));
+  setText(clueBtn, t("clue"));
+  setText(restartBtn, t("restart"));
+  setText(resultTitle, t("resultTitle"));
+  setText(recapTitle, t("recap"));
+  setText(bestScoreEndLabel, `${t("bestScore")} :`);
+  setText(colQuestion, t("colQuestion"));
+  setText(colYourAnswer, t("colYourAnswer"));
+  setText(colCorrectAnswer, t("colCorrectAnswer"));
+  setText(progressPrefix, `${t("question")} `);
+  setText(timerPrefix, `${t("timer")} : `);
+  const allOption = themeSelect.querySelector('option[value="all"]');
+  if (allOption) allOption.textContent = t("allThemes");
+}
+
+const THEME_COLORS = {
+  sport: "var(--color-sport)",
+  histoire: "var(--color-histoire)",
+  geographie: "var(--color-geographie)",
+};
+
+const DEFAULT_BACKGROUND =
+  "linear-gradient(160deg, var(--color-bg-start), var(--color-bg-end))";
+
+function applyThemeBackground(theme) {
+  document.body.style.background =
+    THEME_COLORS[theme?.toLowerCase()] ?? DEFAULT_BACKGROUND;
 }
 
 const questionsReady = loadQuestions();
@@ -52,13 +101,25 @@ let timerId = null;
 let flashcardMode = false;
 let userAnswers = [];
 
-// DOM Elements
 const introScreen = getElement("#intro-screen");
 const questionScreen = getElement("#question-screen");
 const resultScreen = getElement("#result-screen");
 
+const appTitle = getElement("#app-title");
+const appNotice = getElement("#app-notice");
+const bestScoreLabel = getElement("#best-score-label");
 const bestScoreValue = getElement("#best-score-value");
+const bestScoreEndLabel = getElement("#best-score-end-label");
 const bestScoreEnd = getElement("#best-score-end");
+const themeLabel = getElement("#theme-label");
+const languageLabel = getElement("#language-label");
+const resultTitle = getElement("#result-title");
+const recapTitle = getElement("#recap-title");
+const colQuestion = getElement("#col-question");
+const colYourAnswer = getElement("#col-your-answer");
+const colCorrectAnswer = getElement("#col-correct-answer");
+const progressPrefix = getElement("#progress-prefix");
+const timerPrefix = getElement("#timer-prefix");
 
 const questionText = getElement("#question-text");
 const answersDiv = getElement("#answers");
@@ -70,6 +131,9 @@ const flashcardBtn = getElement("#flashcard-btn");
 const restartBtn = getElement("#restart-btn");
 const timerDiv = getElement("#timer-div");
 const themeSelect = getElement("#theme-select");
+const shareBtn = getElement("#share-btn");
+const shareLink = getElement("#share-link");
+const languageSelect = getElement("#lang-select");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -78,14 +142,26 @@ const recapBody = getElement("#recap-body");
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
 
-// Init
+setLocale(loadFromLocalStorage("locale", "fr"));
+populateLanguages();
+updateInterfaceLanguage();
+setText(bestScoreValue, bestScore);
+
+languageSelect.addEventListener("change", () => {
+  setLocale(languageSelect.value);
+  saveToLocalStorage("locale", languageSelect.value);
+  updateInterfaceLanguage();
+  if (questionScreen.style.display !== "none" && questions.length > 0) {
+    showQuestion();
+  }
+});
+
 startBtn.addEventListener("click", () => startQuiz(false));
 flashcardBtn.addEventListener("click", () => startQuiz(true));
 nextBtn.addEventListener("click", nextQuestion);
 clueBtn.addEventListener("click", showClue);
 restartBtn.addEventListener("click", restartQuiz);
-
-setText(bestScoreValue, bestScore);
+shareBtn.addEventListener("click", shareScore);
 
 async function startQuiz(flashcard) {
   await questionsReady;
@@ -114,11 +190,17 @@ function showQuestion() {
   clearInterval(timerId);
 
   const q = questions[currentQuestionIndex];
-  setText(questionText, q.text);
+  const text = getLocalized(q.text);
+  const answers = getLocalized(q.answers);
+  const clue = getLocalized(q.clue);
+
+  setText(questionText, text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
+  applyThemeBackground(q.theme);
+
   answersDiv.innerHTML = "";
-  q.answers.forEach((answer, index) => {
+  answers.forEach((answer, index) => {
     const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
     answersDiv.appendChild(btn);
   });
@@ -127,14 +209,13 @@ function showQuestion() {
   hideElement(clueText);
   setText(clueText, "");
 
-  if (q.clue) {
+  if (clue) {
     showElement(clueBtn);
     clueBtn.disabled = false;
   } else {
     hideElement(clueBtn);
   }
 
-  // Pas de chrono en mode flashcard, bouton suivant toujours visible
   if (flashcardMode) {
     hideElement(timerDiv);
     nextBtn.classList.remove("hidden");
@@ -155,9 +236,10 @@ function showQuestion() {
 
 function showClue() {
   const q = questions[currentQuestionIndex];
-  if (!q.clue) return;
+  const clue = getLocalized(q.clue);
+  if (!clue) return;
 
-  setText(clueText, q.clue);
+  setText(clueText, clue);
   showElement(clueText);
   clueBtn.disabled = true;
 }
@@ -193,21 +275,24 @@ function nextQuestion() {
 function endQuiz() {
   hideElement(questionScreen);
 
-  // En mode flashcard, pas de score : retour à l'accueil
   if (flashcardMode) {
+    applyThemeBackground();
     showElement(introScreen);
     return;
   }
 
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, questions.length);
+  setText(scoreText, t("yourScore", { score, total: questions.length }));
 
   if (score > bestScore) {
     bestScore = score;
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+
+  hideElement(shareLink);
+  shareBtn.textContent = "Partager mon score";
 
   showRecap();
 }
@@ -218,16 +303,19 @@ function showRecap() {
   questions.forEach((q, i) => {
     const row = document.createElement("tr");
 
+    const text = getLocalized(q.text);
+    const answers = getLocalized(q.answers);
+
     const questionCell = document.createElement("td");
-    questionCell.textContent = q.text;
+    questionCell.textContent = text;
 
     const userCell = document.createElement("td");
     const userAnswer = userAnswers[i];
     userCell.textContent =
-      userAnswer !== undefined ? q.answers[userAnswer] : "Pas de réponse";
+      userAnswer !== undefined ? answers[userAnswer] : t("noAnswer");
 
     const correctCell = document.createElement("td");
-    correctCell.textContent = q.answers[q.correct];
+    correctCell.textContent = answers[q.correct];
 
     row.appendChild(questionCell);
     row.appendChild(userCell);
@@ -238,7 +326,23 @@ function showRecap() {
 
 function restartQuiz() {
   hideElement(resultScreen);
+  applyThemeBackground();
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);
+}
+
+function shareScore() {
+  const lien =
+    location.origin +
+    location.pathname +
+    "?score=" +
+    score +
+    "&total=" +
+    questions.length;
+
+  setText(shareLink, lien);
+  showElement(shareLink);
+  navigator.clipboard.writeText(lien);
+  shareBtn.textContent = "Lien copie";
 }

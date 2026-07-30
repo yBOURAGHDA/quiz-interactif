@@ -6,16 +6,23 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
   <body>
-    <h1>Quiz Dynamique</h1>
+    <h1 id="app-title">Quiz Dynamique</h1>
 
     <div id="intro-screen">
-      <p class="notice">
+      <p id="app-notice" class="notice">
         Testez vos connaissances en quelques questions chronométrées !
       </p>
-      <p>Meilleur score : <span id="best-score-value">0</span></p>
+      <p>
+        <span id="best-score-label">Meilleur score</span>
+        <span id="best-score-value">0</span>
+      </p>
       <div id="theme-menu">
-        <label for="theme-select">Theme :</label>
+        <label id="theme-label" for="theme-select">Theme :</label>
         <select id="theme-select"></select>
+      </div>
+      <div id="language-menu">
+        <label id="language-label" for="lang-select">Langue :</label>
+        <select id="lang-select"></select>
       </div>
       <button id="start-btn">Commencer le quiz</button>
       <button id="flashcard-btn">Mode Flashcard</button>
@@ -23,28 +30,37 @@
 
     <div id="question-screen" style="display: none">
       <div id="progress">
-        Question <span id="current-question-index"></span> /
+        <span id="progress-prefix">Question</span>
+        <span id="current-question-index"></span> /
         <span id="total-questions"></span>
       </div>
       <p id="question-text"></p>
       <div id="answers"></div>
-      <div id="timer-div">Temps restant : <span id="time-left">0</span>s</div>
+      <div id="timer-div">
+        <span id="timer-prefix">Temps restant :</span>
+        <span id="time-left">0</span>s
+      </div>
       <p id="clue-text" class="hidden"></p>
       <button id="clue-btn" class="hidden">Aide</button>
       <button id="next-btn" class="hidden">Question suivante</button>
     </div>
 
     <div id="result-screen" style="display: none">
-      <h2>Résultat final</h2>
+      <h2 id="result-title">Résultat final</h2>
       <p id="score-text"></p>
-      <p>Meilleur score : <span id="best-score-end">0</span></p>
-      <h3>Récapitulatif</h3>
+      <p>
+        <span id="best-score-end-label">Meilleur score</span>
+        <span id="best-score-end">0</span>
+      </p>
+      <button id="share-btn">Partager mon score</button>
+      <p id="share-link" class="hidden"></p>
+      <h3 id="recap-title">Récapitulatif</h3>
       <table id="recap-table">
         <thead>
           <tr>
-            <th>Question</th>
-            <th>Votre réponse</th>
-            <th>Bonne réponse</th>
+            <th id="col-question">Question</th>
+            <th id="col-your-answer">Votre réponse</th>
+            <th id="col-correct-answer">Bonne réponse</th>
           </tr>
         </thead>
         <tbody id="recap-body"></tbody>
