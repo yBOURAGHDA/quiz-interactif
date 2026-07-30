@@ -2,7 +2,8 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 20px;
   text-align: center;
-  background: #fafafa;
+  background: linear-gradient(160deg, #eef3f8, #fafafa);
+  min-height: 100vh;
   color: #333;
 }
 
@@ -88,4 +89,62 @@ button:hover {
 #score-text {
   font-size: 1.2em;
   margin-bottom: 10px;
+}
+
+#theme-menu {
+  margin: 15px 0;
+}
+
+#theme-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  background: #fff;
+  color: #333;
+}
+
+#flashcard-btn {
+  background-color: #607d8b;
+}
+
+#flashcard-btn:hover {
+  background-color: #546e7a;
+}
+
+#clue-btn {
+  background-color: #f9a825;
+}
+
+#clue-btn:hover {
+  background-color: #f57f17;
+}
+
+#clue-text {
+  font-style: italic;
+  color: #6d4c41;
+}
+
+/* tableau de recap */
+#recap-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 0.95em;
+}
+
+#recap-table th,
+#recap-table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+#recap-table th {
+  background-color: #eceff1;
+}
+
+#recap-table tr:nth-child(even) {
+  background-color: #f7f7f7;
 }
