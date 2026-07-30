@@ -1,0 +1,128 @@
+{
+  "Sport": [
+    {
+      "text": "Combien de joueurs composent une equipe de football sur le terrain ?",
+      "answers": ["9", "10", "11", "12"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "Le nombre de joueurs est impair"
+    },
+    {
+      "text": "Dans quel sport realise-t-on un service gagnant appele « ace » ?",
+      "answers": ["Tennis", "Rugby", "Cyclisme", "Natation"],
+      "correct": 0,
+      "timeLimit": 10,
+      "difficulty": 2,
+      "clue": "c'est un sport de raquette"
+    },
+    {
+      "text": "Tous les combien d'annees se deroulent les Jeux olympiques d'ete ?",
+      "answers": ["2 ans", "3 ans", "4 ans", "5 ans"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 2,
+      "clue": "c'est un sport de raquette"
+    },
+    {
+      "text": "Quel pays a remporte la Coupe du monde de football en 2018 ?",
+      "answers": ["Bresil", "France", "Allemagne", "Argentine"],
+      "correct": 1,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "On est les meilleurs au monde"
+    },
+    {
+      "text": "Combien de points vaut un panier a trois points au basket-ball ?",
+      "answers": ["1", "2", "3", "4"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "réflechis"
+    }
+  ],
+  "Histoire": [
+    {
+      "text": "En quelle annee a debute la Revolution francaise ?",
+      "answers": ["1689", "1789", "1815", "1848"],
+      "correct": 1,
+      "timeLimit": 15,
+      "difficulty": 3,
+      "clue": "1 an avant 1790"
+    },
+    {
+      "text": "Qui fut le premier empereur des Francais ?",
+      "answers": ["Louis XIV", "Napoleon Bonaparte", "Charlemagne", "Jules Cesar"],
+      "correct": 1,
+      "timeLimit": 15,
+      "difficulty": 2,
+      "clue": "Charl...."
+    },
+    {
+      "text": "En quelle annee s'est terminee la Seconde Guerre mondiale ?",
+      "answers": ["1918", "1939", "1945", "1950"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 2,
+      "clue": "194..."
+    },
+    {
+      "text": "Quel mur emblematique est tombe en 1989 ?",
+      "answers": ["Le mur de Berlin", "La Grande Muraille", "Le mur d'Hadrien", "Le mur des Lamentations"],
+      "correct": 0,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "Le mur de B..."
+    },
+    {
+      "text": "Qui a atteint le continent americain en 1492 ?",
+      "answers": ["Vasco de Gama", "Christophe Colomb", "Fernand de Magellan", "Marco Polo"],
+      "correct": 1,
+      "timeLimit": 15,
+      "difficulty": 3,
+      "clue": "Colomb...."
+    }
+  ],
+  "Geographie": [
+    {
+      "text": "Quelle est la capitale de l'Italie ?",
+      "answers": ["Milan", "Rome", "Naples", "Venise"],
+      "correct": 1,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "La ville de l'amour"
+    },
+    {
+      "text": "Quel est le plus grand ocean du monde ?",
+      "answers": ["Ocean Atlantique", "Ocean Pacifique", "Ocean Indien", "Ocean Arctique"],
+      "correct": 1,
+      "timeLimit": 10,
+      "difficulty": 2,
+      "clue": "Peace?"
+    },
+    {
+      "text": "Quel est le plus haut sommet du monde ?",
+      "answers": ["Le mont Blanc", "Le K2", "L'Everest", "Le Kilimandjaro"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "Everest...."
+    },
+    {
+      "text": "Quelle est la capitale du Japon ?",
+      "answers": ["Pekin", "Seoul", "Tokyo", "Bangkok"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 1,
+      "clue": "Tokyo"
+    },
+    {
+      "text": "Dans quel pays se trouve la ville de Marrakech ?",
+      "answers": ["Algerie", "Tunisie", "Maroc", "Egypte"],
+      "correct": 2,
+      "timeLimit": 10,
+      "difficulty": 3,
+      "clue": "Maroc"
+    }
+  ]
+}
